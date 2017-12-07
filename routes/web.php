@@ -2,6 +2,4 @@
 
 Route::get('/', 'CardsController@index');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/play', 'CardsController@show');
