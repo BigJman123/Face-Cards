@@ -2,4 +2,4 @@
 
 Route::get('/', 'CardsController@index');
 
-Route::get('/play', 'CardsController@show');
+Route::get('/play', 'PlayController@index')->name('play');

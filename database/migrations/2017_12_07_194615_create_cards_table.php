@@ -18,7 +18,7 @@ class CreateCardsTable extends Migration
             $table->string('name');
             $table->integer('age');
             $table->string('department');
-            $table->string('pictures');
+            $table->string('path');
         });
     }
 
