@@ -9,16 +9,12 @@ class PlayController extends Controller
 {
     public function index()
     {
-    	// $possible = array_rand(range(0, Cards::count()), 4);
-    	// $id = array_rand($possible);
-    	
-        $id = random_int(1, Cards::count());
+    	$possible = array_rand(array_flip(range(1, Cards::count())),4);
+    	$id = $possible[array_rand($possible)];
 
-        $card = Cards::all()->find($id);
+        $cards = Cards::whereIn('id', $possible)->get();
+        $selected = Cards::find($id);
 
-        $name = Cards::pluck('name');
-
-
-        return view('layouts.game', compact('card', 'name'));
+        return view('layouts.game', compact('selected', 'cards', 'possible', 'id'));    
     }
 }

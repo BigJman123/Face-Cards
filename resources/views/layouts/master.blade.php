@@ -12,21 +12,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <link href="/css/cards.css" rel="stylesheet">
-
-    <script type="text/javascript">
-      
-      function rightDiv() {
-        document.getElementById('correctDiv').style.display = "block";
-      }
-
-      function wrongDiv() {
-        document.getElementById('wrongDiv').style.display = "block";
-      }
-
-      setTimeout(() => document.getElementById('correctDiv').style.display = "none", 5000);
-      setTimeout(() => document.getElementById('wrongDiv').style.display = "none", 5000);
-
-    </script>
   </head>
 
   <body>
@@ -36,10 +21,15 @@
       @include('layouts.header')
 
       <div class="container">
+
         @yield('content')
+
       </div>
 
     </div>
 
+    @yield('footer')
+
   </body>
+  
 </html>

@@ -3,27 +3,18 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<img class="rounded mx-auto d-block" src="{{ asset($card->path) }}">	
+		<img class="rounded mx-auto d-block" src="{{ asset($selected->path) }}">	
 	</div>
 
-	<div class="row marketing">
+	<div class="text-center marketing">
       <div class="col-lg-8">
-        
-      	<button class="btn btn-primary" onclick="rightDiv()">
-          {{ $card->name }}
-        </button>
 
-      	<button class="btn btn-primary" onclick="wrongDiv()">
-          {{ $name->random() }}
-        </button>
-
-      	<button class="btn btn-primary" onclick="wrongDiv()">
-          {{ $name->random() }}
-        </button>
-
-      	<button class="btn btn-primary" onclick="wrongDiv()">
-          {{ $name->random() }}
-        </button>
+        @foreach($cards as $card)
+          <button class="btn btn-primary" onclick="{{ $card->id === $selected->id ? 'right()' : 'wrong()'}}">
+            {{ $card->name }}
+          </button>
+        @endforeach
+      	
 
       </div>
     </div>
@@ -33,8 +24,32 @@
     </div>
 
     <div id="wrongDiv" class="container alert alert-danger" style="display: none" value="showDiv">
-      <h4>Wrong</h4>
+      <h4>Wrong. Try again.</h4>
     </div>
 
 </div>
 @endsection
+
+@section('footer')
+<script type="text/javascript">
+      
+      function right() {
+
+        document.getElementById('correctDiv').style.display = "block";
+
+        setTimeout(function() {
+          window.location.reload();
+        }, 1000);
+
+      }
+
+      function wrong() {
+        
+        document.getElementById('wrongDiv').style.display = "block";
+
+        setTimeout(() => document.getElementById('wrongDiv').style.display = "none", 1000);
+
+      }
+
+</script>
+@endsection 
