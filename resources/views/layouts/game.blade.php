@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="text-center marketing">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
 
         @foreach($cards as $card)
           <button class="btn btn-primary" onclick="{{ $card->id === $selected->id ? 'right()' : 'wrong()'}}">
