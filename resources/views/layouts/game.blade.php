@@ -35,7 +35,7 @@
 <script type="text/javascript">
       
       function right() {
-
+        $('button').attr('disabled', true);
         document.getElementById('correctDiv').style.display = "block";
 
         $.post("/play", {'answer': 1}).always(function (data) {
@@ -47,7 +47,7 @@
       }
 
       function wrong() {
-        
+        $('button').attr('disabled', true);
         document.getElementById('wrongDiv').style.display = "block";
 
         $.post("/play", {'answer': 0}).always(function (data) {
