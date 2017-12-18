@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<h3>{{$count+1}} / 10</h3>
 <div class="container">
 	<div class="row">
 		<img class="rounded mx-auto d-block" src="{{ asset($selected->path) }}">	
@@ -37,9 +38,11 @@
 
         document.getElementById('correctDiv').style.display = "block";
 
-        setTimeout(function() {
-          window.location.reload();
-        }, 1000);
+        $.post("/play", {'answer': 1}).always(function (data) {
+              setTimeout(function() {
+                window.location.reload();
+              }, 700);
+          });
 
       }
 
@@ -47,9 +50,12 @@
         
         document.getElementById('wrongDiv').style.display = "block";
 
-        setTimeout(() => document.getElementById('wrongDiv').style.display = "none", 1000);
+        $.post("/play", {'answer': 0}).always(function (data) {
+              setTimeout(function() {
+                window.location.reload();
+              }, 700);
+          });
 
       }
-
 </script>
 @endsection 
