@@ -14,10 +14,14 @@ class CreateAttemptsTable extends Migration
     public function up()
     {
         Schema::create('attempts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_is');
+            $table->integer('card_is');
             $table->integer('attempts');
-            $table->boolean('times-correct');
-            $table->increments('correct-streak');
-            $table->dateTime('proficient-at');
+            $table->integer('times_correct');
+            $table->integer('correct_streak');
+            $table->dateTime('proficient_at');
+            $table->timestamps();
         });
     }
 

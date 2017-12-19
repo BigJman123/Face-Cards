@@ -7,7 +7,7 @@
 
 		<div class="container text-center marketing">
 			
-			<a class="btn btn-lg btn-primary" href="{{ route('home') }}">Home</a>
+			<a class="btn btn-lg btn-primary" href="{{ route('start') }}">Home</a>
 
 			<a class="btn btn-lg btn-primary" href="{{ route('play') }}">Play Again?</a>
 
