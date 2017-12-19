@@ -15,8 +15,8 @@ class CreateAttemptsTable extends Migration
     {
         Schema::create('attempts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_is');
-            $table->integer('card_is');
+            $table->integer('user_id');
+            $table->integer('card_id');
             $table->integer('attempts');
             $table->integer('times_correct');
             $table->integer('correct_streak');
