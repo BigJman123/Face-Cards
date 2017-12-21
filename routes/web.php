@@ -11,3 +11,7 @@ Route::post('/play', 'PlayController@store')->name('play.store');
 Route::get('/results', 'ResultsController@show');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('card/{card}/attempt', 'AttemptController@store')->name('attempt.store');
+
+// route('attempt.store', $selected)
