@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('content')
-
+	
 	<div class="container text-center marketing">
 		<h1>{{ $right . '/' . $total }}</h1>
 
