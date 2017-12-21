@@ -37,6 +37,7 @@ class PlayController extends Controller
     {
         $this->validate($request, ['answer' => 'required|boolean']);
         
+        // move this to the attempt controller
         $answers = Session::get('answers');
         $answers[] = $request->answer;
         Session::put('answers', $answers);

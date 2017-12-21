@@ -11,7 +11,7 @@
       <div class="col-lg-12">
 
         @foreach($cards as $card)
-          <button class="btn btn-primary" onclick="{{ $card->id === $selected->id ? 'right()' : 'wrong()'}}">
+          <button class="btn btn-primary" onclick="{{ $card->id === $selected->id ? 'right('.$card->id.')' : 'wrong('.$card->id.')'}}">
             {{ $card->name }}
           </button>
         @endforeach
@@ -34,11 +34,11 @@
 @section('footer')
 <script type="text/javascript">
       
-      function right() {
+      function right(id) {
         $('button').attr('disabled', true);
         document.getElementById('correctDiv').style.display = "block";
 
-        $.post("/play", {'answer': 1}).always(function (data) {
+        $.post("card/"+id+"/attempt", {'answer': 1}).always(function (data) {
               setTimeout(function() {
                 window.location.reload();
               }, 700);
@@ -46,11 +46,11 @@
 
       }
 
-      function wrong() {
+      function wrong(id) {
         $('button').attr('disabled', true);
         document.getElementById('wrongDiv').style.display = "block";
 
-        $.post("/play", {'answer': 0}).always(function (data) {
+        $.post("card/"+id+"/attempt", {'answer': 0}).always(function (data) {
               setTimeout(function() {
                 window.location.reload();
               }, 700);
