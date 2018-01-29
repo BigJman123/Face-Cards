@@ -1,4 +1,4 @@
-<?php
+lear<?php
 
 namespace Tests\Unit;
 
@@ -14,6 +14,6 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $this->assertTrue(true);
+        $this->get('/play')->assertSee('Face Cards');
     }
 }

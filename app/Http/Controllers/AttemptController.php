@@ -3,58 +3,73 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Card;
+use App\Cards;
 use App\Attempt;
 
 class AttemptController extends Controller
 {
-    public function store (Request $request, Card $card)
+    public function store (Request $request, Cards $card)
     {
-    	
-    	// make a new attempt or increment it by one
-
+    	// abort(404);
     	//  look up an attempt for this card and user
+        // return response()->json('hey', 200);
+        $attempt = $this->createOrUpdateAttempt($card);
 
-    	$attempt = Attempt::where('user_id', auth()->user()->id)->where('card_id', $card->id)->get();
+        $this->updateAttemptForCorrect($attempt, $request);
 
-    	if (is_null($attempt)) {
-    		// create a new attempt
-    		$attempt = Attempt::create([
-				'user_id' => auth()->user()->id,
-				'card_id' => $card->id,
-				'attempts' => 1,
-				'times_correct' => 1,
-				'correct_streak' => 1,
-    		]);
-    	} else {
-    		// update the record
-    			// increment the attempts
-    			// increment times correct
-    			// increment correct_streak
-    			// check to see if proficient
-    		$attempt->increment('attempts');
-    		// check to see if correct
+		$this->checkForProficiency($attempt);
 
-    			// if yes
-    			$attempt->increment('times_correct');
-    			$attempt->increment('correct_streak');
 
-    			// if no
-    			$attempt->update(['correct_streak' => 0]);
+    	// return response()->json('good job');
+    }
 
-			// check to see if proficient
+    private function createOrUpdateAttempt(Cards $card)
+    {
+        $attempt = Attempt::where('user_id', auth()->user()->id)->where('card_id', $card->id)->get();
 
-    			// get a fresh version from the database
-    			$attempt->fresh();
+        if (is_null($attempt)) {
+            // create a new attempt
+            $attempt = Attempt::create([
+                'user_id' => auth()->user()->id,
+                'card_id' => $card->id,
+                'attempts' => 1,
+                'times_correct' => 0,
+                'correct_streak' => 0,
+            ]);
 
-    			// compare to rule
-    				// have they previously been marked proficient?
-    				// did they get it right 5 times in a row?
-    			if (is_null($attempt->proficient_at) && $attempt->correct_streak >= 5) {
-    				$attempt->update(['proficient_at' => now()]);
-    			}
-    	}
+        } else {
+            // update the record
+            $attempt->increment('attempts');
+            $attempt->save();
+        }
+    }
 
-    	return response()->json('good job');
+    private function updateAttemptForCorrect(Attempt $attempt, $request)
+    {
+        // check to see if correct
+        if($request->answer === 1) {
+            // if yes
+            // increment times correct
+            $attempt->increment('times_correct');
+            // increment correct_streak
+            $attempt->increment('correct_streak');
+            // check to see if proficient
+        } else {
+            // if no
+            $attempt->update(['correct_streak' => 0]);
+        }
+    }
+
+    private function checkForProficiency(Attempt $attempt)
+    {
+        // get a fresh version from the database
+        $attempt->fresh();
+
+        // compare to rule
+            // have they previously been marked proficient?
+            // did they get it right 5 times in a row?
+        if (is_null($attempt->proficient_at) && $attempt->correct_streak >= 5) {    
+            $attempt->update(['proficient_at' => now()]);
+        }
     }
 }
