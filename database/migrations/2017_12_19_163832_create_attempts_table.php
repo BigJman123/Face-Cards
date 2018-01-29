@@ -15,12 +15,12 @@ class CreateAttemptsTable extends Migration
     {
         Schema::create('attempts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('card_id');
-            $table->integer('attempts');
-            $table->integer('times_correct');
-            $table->integer('correct_streak');
-            $table->dateTime('proficient_at');
+            $table->integer('user_id')->nullable();
+            $table->integer('card_id')->nullable();
+            $table->integer('attempts')->default(0);
+            $table->integer('times_correct')->default(0);
+            $table->integer('correct_streak')->default(0);
+            $table->dateTime('proficient_at')->nullable();
             $table->timestamps();
         });
     }

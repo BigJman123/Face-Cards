@@ -5,29 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cards;
 use App\Attempt;
+use Session;
 
 class AttemptController extends Controller
 {
     public function store (Request $request, Cards $card)
     {
-    	// abort(404);
+        $this->validate($request, ['answer' => 'required|boolean']);
+
     	//  look up an attempt for this card and user
-        // return response()->json('hey', 200);
         $attempt = $this->createOrUpdateAttempt($card);
 
         $this->updateAttemptForCorrect($attempt, $request);
 
 		$this->checkForProficiency($attempt);
 
+        // Session info for the game
+        $answers = Session::get('answers');
+        $answers[] = $request->answer;
+        Session::put('answers', $answers);
 
-    	// return response()->json('good job');
+    	return response()->json('good job');
     }
 
     private function createOrUpdateAttempt(Cards $card)
     {
-        $attempt = Attempt::where('user_id', auth()->user()->id)->where('card_id', $card->id)->get();
+        $attempt = Attempt::where('user_id', auth()->user()->id)->where('card_id', $card->id)->first();
 
-        if (is_null($attempt)) {
+        if (empty($attempt)) {  
             // create a new attempt
             $attempt = Attempt::create([
                 'user_id' => auth()->user()->id,
@@ -42,12 +47,14 @@ class AttemptController extends Controller
             $attempt->increment('attempts');
             $attempt->save();
         }
+
+        return $attempt;
     }
 
     private function updateAttemptForCorrect(Attempt $attempt, $request)
     {
         // check to see if correct
-        if($request->answer === 1) {
+        if ($request->answer === 1) {
             // if yes
             // increment times correct
             $attempt->increment('times_correct');
