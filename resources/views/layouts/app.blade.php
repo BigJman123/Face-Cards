@@ -29,10 +29,12 @@
 
                     <!-- Branding Image -->
                     {{-- <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Face Cards') }}
                     </a> --}}
 
-                    <h5 class="navbar-brand">Face Cards</h5>
+                    <a href="/">
+                        <h5 class="navbar-brand">Face Cards</h5>
+                    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
