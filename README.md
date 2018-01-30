@@ -13,7 +13,7 @@
 	(5, 'Captain Marvel', 30, 'Avenger', 'assets/images/CaptainMarvel.jpg'),<br>
 	(6, 'Deadpool', 40, 'Crazy', 'assets/images/Deadpool.jpg'),<br>
 	(7, 'Doctor Strange', 45, 'Avenger', 'assets/images/DoctorStrange.jpg'),<br>
-	(8, 'Drax The Destroyer', 40, 'Avenger',<br> 'assets/images/DraxTheDestroyer.jpg'),<br>
+	(8, 'Drax The Destroyer', 40, 'Avenger', 'assets/images/DraxTheDestroyer.jpg'),<br>
 	(9, 'Falcon', 30, 'Avenger', 'assets/images/Falcon.jpg'),<br>
 	(10, 'Gamora', 30, 'Avenger', 'assets/images/Gamora.png'),<br>
 	(11, 'Groot', 100, 'Avenger', 'assets/images/Groot.jpg'),<br>
