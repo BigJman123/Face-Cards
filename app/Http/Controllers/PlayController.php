@@ -18,7 +18,6 @@ class PlayController extends Controller
         } else {
             $answers = Session::get('answers');
         }
-        
 
         // This sets the $count variable to count($answers)
         // count($answers) gets the number of answers in the session
@@ -46,5 +45,18 @@ class PlayController extends Controller
 
         // returns the game view and also passes through the selected, cards, possible, id, and count variables.
         return view('layouts.game', compact('selected', 'cards', 'possible', 'id', 'count'));    
+    }
+
+    public function store(Request $request) 
+    {
+        // This is validating the request and checking if answer is boolean
+        $this->validate($request, ['answer' => 'required|boolean']);
+        
+        // move this to the attempt controller
+        $answers = Session::get('answers');
+        $answers[] = $request->answer;
+        Session::put('answers', $answers);
+
+        return $answers;
     }
 }

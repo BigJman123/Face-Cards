@@ -14,7 +14,7 @@ class ResultsController extends Controller
 
 		$total = count($answers);
 
-    	Session::flush();
+    	Session::forget('answers');
 
 		return view('layouts.results', compact('answers', 'total', 'right'));
 

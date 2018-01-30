@@ -26,12 +26,12 @@
     </div>
 
     <!-- This displays when you get a correct answer -->
-    <div id="correctDiv" class="container alert alert-success" style="display: none" value="showDiv">
+    <div id="correctDiv" class="container alert alert-success" style="display: none">
       <h4>Correct</h4>
     </div>
 
     <!-- This displays when you get the answer wrong -->
-    <div id="wrongDiv" class="container alert alert-danger" style="display: none" value="showDiv">
+    <div id="wrongDiv" class="container alert alert-danger" style="display: none">
       <h4>Wrong. Try again.</h4>
     </div>
 

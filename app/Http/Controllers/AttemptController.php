@@ -12,7 +12,7 @@ class AttemptController extends Controller
     public function store (Request $request, Cards $card)
     {
         $this->validate($request, ['answer' => 'required|boolean']);
-
+        
     	//  look up an attempt for this card and user
         $attempt = $this->createOrUpdateAttempt($card);
 
@@ -25,7 +25,7 @@ class AttemptController extends Controller
         $answers[] = $request->answer;
         Session::put('answers', $answers);
 
-    	return response()->json('good job');
+    	// return response()->json('good job');
     }
 
     private function createOrUpdateAttempt(Cards $card)
