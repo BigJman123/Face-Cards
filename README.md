@@ -1,5 +1,6 @@
 <h1 align="center">
   <b>This is Face Cards!</b>
+  <p>Learn the names of your fellow Wilber employees!</p>
 </h1>
 
 <p align="center">
