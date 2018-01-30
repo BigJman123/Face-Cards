@@ -54,7 +54,7 @@ class AttemptController extends Controller
     private function updateAttemptForCorrect(Attempt $attempt, $request)
     {
         // check to see if correct
-        if ($request->answer === 1) {
+        if ((integer) $request->answer === 1) {
             // if yes
             // increment times correct
             $attempt->increment('times_correct');
